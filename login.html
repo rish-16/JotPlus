@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Jot+</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="login.css" />
+
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+        <script src="login.js"></script>
+    </head>
+
+    <body>
+
+        <div id="login">
+            <div id="login-container">
+                <p id="logo">Jot<i class="far fa-plus"></i></p>
+
+                <p id="error-message"></p>
+                <input type="email" placeholder="Email" id="user-email-login">
+                <br>
+                <input type="password" placeholder="Password" id="user-password-login">
+                <br>
+                <button id="login-submit">Login</button>
+                <br>
+                <div id="login-options">
+                    <p id="register-account">Register an account</p>
+                    <p id="forgot-pwd">Forgot Password</p>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

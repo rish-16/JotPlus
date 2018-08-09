@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Jot+</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+
+        <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+        <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+        <script src="renderer.js"></script>
+    </head>
+
+    <body>
+
+        <div id="menubar">
+            <div id="inboxes">
+                <p id="my-notes" style="color: #25B892;border-left: 3px solid #25B892;" class="chosen-inbox"><i class="far fa-clipboard"></i> My Notes</p>
+                <p id="starred"><i class="far fa-star"></i> Starred</p>
+                <p id="shared"><i class="fas fa-share-alt"></i> Shared</p>
+                <p id="archived"><i class="far fa-folder"></i> Archived</p>
+                <p id="deleted"><i class="fas fa-trash-alt"></i> Deleted</p>
+            </div>
+
+            <div id="tags">
+                <p id="tags-title">TAGS</p>
+                <div id="tags-area">
+                    <div class="tag">
+                        <div>
+                            <div class="tag-circle"></div>
+                        </div>
+                        <div>
+                            <div class="tag-title">Work</div>
+                        </div>
+                    </div>
+
+                    <div class="tag">
+                        <div>
+                            <div class="tag-circle"></div>
+                        </div>
+                        <div>
+                            <div class="tag-title">Personal</div>
+                        </div>
+                    </div>
+
+                    <div class="tag">
+                        <div>
+                            <div class="tag-circle"></div>
+                        </div>
+                        <div>
+                            <div class="tag-title">Daily Journal</div>
+                        </div>
+                    </div>
+
+                    <div id="add-tag-button">
+                        <div>
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <div>
+                            <p>Add a Tag</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="account-info">
+                <div>
+                    <img src="images/profilepic.jpeg" id="profile-picture">
+                </div>
+                <div>
+                    <p id="profile-username"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="notes-display">
+            <div id="notes-search-box">
+                <input type="text" id="notes-searchbar" placeholder="Search notes">
+            </div>
+            <div id="notes-area">
+                
+            </div>
+
+            <div id="add-note-box">
+                <button id="add-note-button">Add a Note</button>
+            </div>
+        </div>
+
+        <div id="display-area">
+            <div id="toolbar">
+                <div>
+                    <select id="font-size-select">
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="14">14</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                        <option value="24">24</option>
+                        <option value="28">28</option>
+                        <option value="30">30</option>
+                        <option value="32">32</option>
+                        <option value="38">38</option>
+                    </select>
+    
+                    <select id="bullet-select">
+                        <option value="•">•</option>
+                        <option value="*">*</option>
+                        <option value="->">-></option>
+                    </select>
+    
+                    <div id="header-tag-size">
+                        <p id="h1">H1</p>
+                        <p id="h2">H2</p>
+                        <p id="h3">H3</p>
+                    </div>
+                    
+                    <div id="text-style">
+                        <i class="fas fa-bold"></i>
+                        <i class="fas fa-italic"></i>
+                        <i class="fas fa-underline"></i>
+                    </div>
+
+                    <div id="text-alignment">
+                        <i class="fas fa-align-left"></i>
+                        <i class="fas fa-align-justify"></i>
+                        <i class="fas fa-align-right"></i>
+                    </div>
+
+                    <i class="fas fa-image" id="image-select"></i>
+                </div>
+            </div>
+
+            <div id="writing-area" contenteditable="true">
+
+            </div>
+        </div>
+
+    </body>
+</html>

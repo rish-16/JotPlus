@@ -1,0 +1,14 @@
+{
+  "name": "jotplus",
+  "version": "1.0.0",
+  "description": "Cross-platform note taking app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Rishabh Anand",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^1.6.2"
+  }
+}

@@ -1,0 +1,122 @@
+body, html {
+    padding: 0;
+    margin: 0;
+    font-family: Avenir Next;
+}
+
+p, i, a {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+input:focus, textarea:focus, button:focus, select:focus, p:focus, div:focus {
+    outline: none;
+}
+
+* {
+    user-select: none;
+}
+
+/* -------------------------------------------------------------------------------------------------------------- */
+
+#login {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(185, 138, 138, 0.322);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#login #login-container {
+    width: 350px;
+    height: 400px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#login #login-container #logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: #5f27cd;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+#login #login-container #logo i {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1dd1a1;
+}
+
+#login #login-container #error-message {
+    width: 85%;
+    margin: 5px auto;
+    text-align: left;
+    height: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ff6b6b;
+    transition: 0.5s;
+}
+
+#login #login-container #user-email-login, #login #login-container #user-password-login {
+    position: relative;
+    width: 85%;
+    height: 40px;
+    /* border: 1px solid rgba(202, 202, 202, 0.178); */
+    border: 1px solid rgba(29, 209, 161, 0.1);
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: Avenir Next;
+    background-color: white;
+    font-size: 14px;
+    font-weight: 500;
+    text-indent: 15px;
+    color: rgb(88, 88, 88);
+}
+
+#login #login-container #user-email-login::placeholder, #login #login-container #user-password-login::placeholder {
+    color: rgb(168, 168, 168);
+}
+
+#login #login-container #login-submit {
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: Avenir Next;
+    background-color: #1dd1a1;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+#login #login-container #login-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#login #login-container #login-options p {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0 15px;
+    color: #5f27cd;
+    text-decoration: underline;
+    cursor: pointer;
+}
