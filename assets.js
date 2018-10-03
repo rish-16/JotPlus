@@ -103,3 +103,21 @@ MessageCard.prototype.addMessage = function() {
         document.body.removeChild(card)
     }, 2500)
 }
+
+/* -------------------------------------------------------------------------------------------------------------- */
+
+function WritingArea(title, content) {
+    this.title = title
+    this.content = content
+}
+
+WritingArea.prototype.loadJot = function(container) {
+    var jot = document.createElement('div')
+    jot.id = 'writing-area'
+
+    jot.innerHTML += '<strong>' + this.title +'</strong>'
+    jot.innerHTML += '\n\n'
+    jot.innerHTML += this.content
+
+    container.innerHTML = jot
+}
