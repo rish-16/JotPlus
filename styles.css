@@ -401,10 +401,6 @@ input:focus, textarea:focus, button:focus, select:focus, p:focus, div:focus {
     margin: 0 auto;
 }
 
-#display-area #writing-area {
-    /* background-color: royalblue; */
-}
-
 /* -------------------------------------------------------------------------------------------------------------- */
 
 .message-card {
