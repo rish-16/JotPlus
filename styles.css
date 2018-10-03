@@ -245,6 +245,12 @@ input:focus, textarea:focus, button:focus, select:focus, p:focus, div:focus {
     position: relative;
     width: 100%;
     height: 80px;
+    cursor: pointer;
+}
+
+.note:hover {
+    opacity: 0.4;
+    transition: 0.5s;
 }
 
 .note .note-top {
@@ -254,7 +260,6 @@ input:focus, textarea:focus, button:focus, select:focus, p:focus, div:focus {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* background-color: royalblue; */
 }
 
 .note .note-top .note-title {
@@ -331,7 +336,7 @@ input:focus, textarea:focus, button:focus, select:focus, p:focus, div:focus {
     bottom: 0;
     left: 550px;
     right: 0;
-    background-color: rgba(188, 143, 143, 0.233);
+    background-color: rgba(209, 203, 203, 0.233);
 }   
 
 #display-area #toolbar {
@@ -398,4 +403,61 @@ input:focus, textarea:focus, button:focus, select:focus, p:focus, div:focus {
 
 #display-area #writing-area {
     /* background-color: royalblue; */
+}
+
+/* -------------------------------------------------------------------------------------------------------------- */
+
+.message-card {
+    position: fixed;
+    left: 40px;
+    bottom: 20px;
+    width: auto;
+    height: 50px;
+    z-index: 5000;
+    background-color: rgb(233, 233, 233);
+    border-radius: 2px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.message-card p {
+    font-size: 14px;
+    font-weight: 600;
+    color: royalblue;
+    padding: 0 20px;
+    margin: auto 0;
+}
+
+.message-card p i {
+    font-size: 15px;
+    padding: 0 7px 0 0;
+}
+
+.message-card.show {
+    visibility: visible;
+   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+   animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }

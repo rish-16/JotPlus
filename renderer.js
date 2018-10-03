@@ -16,23 +16,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileUsername = document.getElementById('profile-username')
     const logoutButton = document.getElementById('account-info')
 
-    firebase.auth().onAuthStateChanged((user) => {
+    const writingArea = document.getElementById('writing-area')
+
+    let userId = null
+    const ref = firebase.database().ref()
+    const stRef = firebase.storage().ref()
+    firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            window.localStorage.setItem('CurrentUser', user)
-            firebase.database().ref().child('User Data').child(user.uid).child('Username').once('value').then((snapshot) => {
-                profileUsername.innerHTML = snapshot.val() 
-                loadNotes(user)
-            })
+            userId = firebase.auth().currentUser.uid
+            loadUser(userId)
+            console.log(userId)
+            loadNotes(userId)
         } else {
-            console.log('No user logged in')
+            // No user is signed in.
+            console.log('No user has signed in.')
         }
     })
 
-    function urlify(text) {
-        var urlRegex = /(https?:\/\/[^\s]+)/g
-        return text.replace(urlRegex, function(url) {
-            return '<a style="color: #25B892;" href="' + url + '">' + url + '</a>'
+    function loadUser(user) {
+        ref.child('User Data').child(user).child('Username').once('value', (snapshot) => {
+            profileUsername.innerHTML = snapshot.val()
         })
+    }
+
+    addNoteButton.onclick = () => { 
+        var content = writingArea.innerText
+        var title = content.split('\n')[0]
+        if (content.length > 0) {
+            var project = new Jot(userId, title, content)
+            project.handleDeployment(notesArea)
+        } else {
+            var msg = new MessageCard('Jot cannot be empty')
+            msg.addMessage()
+        }
     }
 
     logoutButton.onclick = () => {
@@ -45,55 +61,17 @@ document.addEventListener('DOMContentLoaded', () => {
         })        
     }
 
-    addNoteButton.onclick = () => {
-        var randomID = ''
-        chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        for (var i = 16; i > 0; --i) randomID += chars[Math.floor(Math.random() * chars.length)]
-        var date = new Date()
-        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-        var current_date = date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear()
-        var curent_time = date.getTime()
-        firebase.database().ref().child('User Data').child(user.uid).child('Jots').child(randomID).set({
-            'Jot Content': '',
-            'Jot Created': current_date,
-            'Jot Timestamp': curent_time,
-            'Jot ID': randomID,
-            'Jot Title': 'Untitled Jot',
-        })
-        loadNotes()
-    }
-
     function loadNotes(user) {
-        firebase.database().ref().child('User Data').child(user.uid).child('Jots').on('value', (snapshot) => {
-            console.log(snapshot.val())
+        ref.child('User Data').child(user).child('Jots').once('value', (snapshot) => {
             snapshot.forEach((child) => {
-                console.log('Adding new note')
-                var newNote = document.createElement('div')
-                newNote.classList += 'note'
-
-                var newNoteTop = document.createElement('div')
-                newNoteTop.classList += 'note-top'
-
-                var newNoteTopTitle = document.createElement('p')
-                newNoteTopTitle.classList += 'note-title'
-                newNoteTopTitle.innerText = child.val()['Jot Title']
-                var newNoteTopDate = document.createElement('p')
-                newNoteTopDate.classList += 'note-creation-date'
-                newNoteTopDate.innerText = child.val()['Jot Created']
-
-                var newNoteBottom = document.createElement('div')
-                newNoteBottom.classList += 'note-bottom'
-
-                var newNoteBottomContent = document.createElement('p')
-                newNoteBottomContent.classList += 'note-content'
-                newNoteBottomContent.innerHTML = child.val()['Jot Content']
-
-                newNoteTop.appendChild(newNoteTopTitle)
-                newNoteTop.appendChild(newNoteTopDate)
-                newNoteBottom.appendChild(newNoteBottomContent)
-                newNote.appendChild(newNoteTop)
-                newNote.appendChild(newNoteBottom)
-                notesArea.appendChild(newNote)
+                var data = child.val()
+                console.log(data)
+                var title = data['TITLE']
+                var content = data['CONTENT']
+                var date = data['CREATIONDATE']
+                
+                var card = new JotCard(title, content, date)
+                card.addCard(notesArea)
             })
         })
     }

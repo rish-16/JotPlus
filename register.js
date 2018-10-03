@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loginAccountButton = document.getElementById('register-account')
 
+    const ref = firebase.database().ref()
+
     loginAccountButton.onclick = () => {
         window.location = 'login.html'
     }
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) { // User exists 
             console.log(user.uid)
-            firebase.database().ref().child('User Data').child(user.uid).child('Username').set(username.value).then(() => {
+            ref.child('User Data').child(user.uid).child('Username').set(username.value).then(() => {
                 window.location = 'index.html'
             })
         } else {

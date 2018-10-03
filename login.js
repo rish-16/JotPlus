@@ -27,7 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (userEmail.length < 1 || userPWD.length < 1) {
             errorMessage.innerText = 'Email or password cannot be empty'
         } else {
-            firebase.auth().signInWithEmailAndPassword(userEmail, userPWD).catch((err) => {
+            var promise = firebase.auth().signInWithEmailAndPassword(userEmail, userPWD)
+            promise.then(() => {
+                console.log('Logged in')
+            })
+            promise.catch((err) => {
                 console.log(err)
             })
         }
@@ -35,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     firebase.auth().onAuthStateChanged((user) => {
         if (user) { // User exists 
-            console.log(user.uid)
             window.location = 'index.html'
         } else {
             console.log('No user logged in')
