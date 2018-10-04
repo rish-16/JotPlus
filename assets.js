@@ -1,4 +1,5 @@
 function Jot(user, title, content) {
+    this.jotID = randomID()
     this.jUser = user
     this.title = title
     this.content = content
@@ -6,17 +7,20 @@ function Jot(user, title, content) {
     this.timestamp = getTimestamp()
 }
 
-Jot.prototype.handleDeployment = function(container) {
+Jot.prototype.getDate = function() {
+    return this.creationDate
+}
+
+Jot.prototype.handleDeployment = function() {
     const ref = firebase.database().ref()
-    ref.child('User Data').child(this.jUser).child('Jots').child(randomID()).set({
+    ref.child('User Data').child(this.jUser).child('Jots').child(this.jotID).set({
         'TITLE': this.title,
+        'ID': this.jotID,
         'CONTENT': this.content,
         'USER': this.jUser,
         'CREATIONDATE': this.creationDate,
         'TIMESTAMP': this.timestamp
     })
-    var card = new JotCard(this.title, this.content, this.creationDate)
-    card.addCard(container)
 }
 
 function randomID() {
@@ -54,7 +58,7 @@ function JotCard(title, content, date) {
     this.date = date
 }
 
-JotCard.prototype.addCard = function(container) {
+JotCard.prototype.addCard = function(container, writingContainer) {
     var newNote = document.createElement('div')
     newNote.classList += 'note'
 
@@ -81,6 +85,11 @@ JotCard.prototype.addCard = function(container) {
     newNote.appendChild(newNoteTop)
     newNote.appendChild(newNoteBottom)
     container.prepend(newNote)
+
+    newNote.onclick = () => {
+        var writingArea = new WritingArea(this.title, this.preview)
+        writingArea.loadJot(writingContainer)
+    }
 }
 
 /* -------------------------------------------------------------------------------------------------------------- */
@@ -115,9 +124,10 @@ WritingArea.prototype.loadJot = function(container) {
     var jot = document.createElement('div')
     jot.id = 'writing-area'
 
-    jot.innerHTML += '<strong>' + this.title +'</strong>'
-    jot.innerHTML += '\n\n'
-    jot.innerHTML += this.content
+    jot.innerHTML += '<strong style="font-size: 20px;">' + this.title +'</strong>'
+    jot.innerHTML += '<br><br>'
+    jot.innerHTML +=  this.content.split('\n').splice(1,2)[1]
 
-    container.innerHTML = jot
+    container.innerHTML = ''
+    container.appendChild(jot)
 }

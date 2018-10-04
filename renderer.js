@@ -40,15 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     addNoteButton.onclick = () => { 
-        var content = writingArea.innerText
-        var title = content.split('\n')[0]
-        if (content.length > 0) {
-            var project = new Jot(userId, title, content)
-            project.handleDeployment(notesArea)
-        } else {
-            var msg = new MessageCard('Jot cannot be empty')
-            msg.addMessage()
-        }
+        writingArea.innerHTML = ''
+        var project = new Jot(userId, title, content)
+        var date = project.getDate()
+        var card = new JotCard(title, content, date)
+        card.addCard(notesArea)
+        writingArea.addEventListener('input', (evnt) => {        
+            var content = evnt.target.innerText
+            var title = content.split('\n')[0]
+            if (content.length > 0) {
+                setInterval(() => {
+                    project.handleDeployment(notesArea, writingArea)
+                }, 6000)
+            }
+        })
     }
 
     logoutButton.onclick = () => {
@@ -71,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 var date = data['CREATIONDATE']
                 
                 var card = new JotCard(title, content, date)
-                card.addCard(notesArea)
+                card.addCard(notesArea, writingArea)
             })
         })
     }
