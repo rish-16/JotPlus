@@ -1,14 +1,22 @@
-function Jot(user, title, content) {
+function Jot(user) {
     this.jotID = randomID()
     this.jUser = user
-    this.title = title
-    this.content = content
+    this.title = ''
+    this.content = ''
     this.creationDate = getCreationDate()
     this.timestamp = getTimestamp()
 }
 
 Jot.prototype.getDate = function() {
     return this.creationDate
+}
+
+Jot.prototype.setTitle = function(title) {
+    this.title = title
+}
+
+Jot.prototype.setContent = function(content) {
+    this.content = content
 }
 
 Jot.prototype.handleDeployment = function() {

@@ -41,18 +41,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     addNoteButton.onclick = () => { 
         writingArea.innerHTML = ''
-        var project = new Jot(userId, title, content)
+        var project = new Jot(userId)
         var date = project.getDate()
-        var card = new JotCard(title, content, date)
-        card.addCard(notesArea)
-        writingArea.addEventListener('input', (evnt) => {        
-            var content = evnt.target.innerText
-            var title = content.split('\n')[0]
-            if (content.length > 0) {
-                setInterval(() => {
-                    project.handleDeployment(notesArea, writingArea)
-                }, 6000)
-            }
+        writingArea.addEventListener('focus', (evnt) => {
+            var card = new JotCard(date)
+            card.addCard(notesArea)
+
+            setInterval(() => {
+                var content = evnt.target.innerText
+                var title = content.split('\n')[0]
+                project.setTitle(title)
+                project.setContent(content)
+            }, 5000)
         })
     }
 
